@@ -8,7 +8,9 @@ You are given a JAR that contains source code.
 instructor if you are not familiar with Eclipse
 
 2\. Run the program a few times to see how it works. You should see
-clear evidence of bugs. 3. Use the debugger to trace what is going
+clear evidence of bugs.
+
+3\. Use the debugger to trace what is going
 wrong. Resist the temptation to just read the code looking for bugs.
 The instructor will walk you through using the debugger to determine
 what code causes at least one of the problems.
@@ -18,8 +20,7 @@ you have done all that you can with this code.
 
 5\. Answer the questions on the questions page.
 
-6\. Hand in your answers when you are done (or submit to eCentennial
-dropbox folder).
+6\. Hand in your answers when you are done.
 
 The JAR file contains 12 types, as shown in the following partial UML
 class diagrams.
