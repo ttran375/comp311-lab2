@@ -45,7 +45,7 @@ the system response deviated from expected output. (6).
 
 ### Defect 1
 
-`getYesNoAnswer` method does not properly handle edge cases, including empty inputs and invalid responses. Additionally, we should make sure the prompt message is reset correctly after each attempt. Here's the updated UserPrompter class:
+`getYesNoAnswer` method does not properly handle edge cases, including `N` inputs and invalid responses.
 
 ```java
 package com.cc.airline.utilities;

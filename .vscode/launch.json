@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Manifest",
+            "request": "launch",
+            "mainClass": "com.cc.airline.utilities.Manifest",
+            "projectName": "comp311-lab2_f7c26330"
+        },
+        {
+            "type": "java",
+            "name": "UserPrompter",
+            "request": "launch",
+            "mainClass": "com.cc.airline.utilities.UserPrompter",
+            "projectName": "comp311-lab2_f7c26330"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
