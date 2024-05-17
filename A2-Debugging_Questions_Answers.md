@@ -4,24 +4,7 @@
 
 1. What class is the driver for this slice of the application? (0.5)
 
-The driver class for this slice of the application is the class that contains the `main` method, which is responsible for initiating the execution of the program. In the provided code, the `UserPrompter` class itself serves as the driver class because it includes the `main` method.
-
-```java
-public static void main(String[] args) {
-    UserPrompter up = new UserPrompter();
-    up.setPrompt("What is your name?");
-    System.out.println("hello " + up.getAnswer());
-
-    UserPrompter confirmer = new UserPrompter("Are you ready?");
-    if (confirmer.getYesNoAnswer()) {
-        System.out.println("OK, let's go!");
-    } else {
-        System.out.println("Sorry to hear that.");
-    }
-}
-```
-
-This `main` method creates instances of `UserPrompter`, sets prompts, and processes user input, driving the flow of the application. Therefore, the `UserPrompter` class is the driver for this slice of the application.
+The main driver of the application is `UserPrompter.java`, as it handles user interaction directly and starts the process of gathering passenger information and seat assignments. `Manifest.java` serves as a supportive class that manages passenger data and could be used in conjunction with `UserPrompter` to provide a more complete functionality.
 
 ## Questions 2
 
@@ -48,77 +31,5 @@ the system response deviated from expected output. (6).
 `getYesNoAnswer` method does not properly handle edge cases, including `N` inputs and invalid responses.
 
 ```java
-package com.cc.airline.utilities;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-public class UserPrompter {
-
-    protected String prompt = "?";
-    protected BufferedReader lineReader;
-
-    public UserPrompter() {
-        lineReader = new BufferedReader(new InputStreamReader(System.in));
-    }
-
-    public UserPrompter(String prompt) {
-        this();
-        setPrompt(prompt);
-    }
-
-    public String getAnswer() {
-        try {
-            String answer = null;
-            while (answer == null || answer.length() < 1) {
-                System.out.print(prompt + " ");
-                answer = lineReader.readLine().trim();
-            }
-            return answer;
-        } catch (IOException ioe) {
-            // if console I/O fails there is no recovery
-            return null;
-        }
-    }
-
-    public boolean getYesNoAnswer() {
-        String originalPrompt = getPrompt();
-        for (int i = 0; i < 3; i++) {
-            String answer = getAnswer();
-            if (answer == null) {
-                return false;
-            }
-            answer = answer.trim().toUpperCase();
-            if (answer.equals("Y")) {
-                return true;
-            } else if (answer.equals("N")) {
-                return false;
-            } else {
-                setPrompt(originalPrompt + " Please answer Y or N: ");
-            }
-        }
-        return false;
-    }
-
-    public static void main(String[] args) {
-        UserPrompter up = new UserPrompter();
-        up.setPrompt("What is your name?");
-        System.out.println("hello " + up.getAnswer());
-        UserPrompter confirmer = new UserPrompter("Are you ready?");
-        if (confirmer.getYesNoAnswer()) {
-            System.out.println("OK, let's go!");
-        } else {
-            System.out.println("Sorry to hear that.");
-        }
-    }
-
-    public String getPrompt() {
-        return prompt;
-    }
-
-    public void setPrompt(String prompt) {
-        this.prompt = prompt;
-    }
-}
 ```
