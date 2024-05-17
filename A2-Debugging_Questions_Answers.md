@@ -6,8 +6,6 @@
 
 The driver class for this slice of the application is the class that contains the `main` method, which is responsible for initiating the execution of the program. In the provided code, the `UserPrompter` class itself serves as the driver class because it includes the `main` method.
 
-Here's the relevant part of the `UserPrompter` class that acts as the driver:
-
 ```java
 public static void main(String[] args) {
     UserPrompter up = new UserPrompter();
@@ -46,5 +44,3 @@ defect report. Describe where user is in using the system and what the user inpu
 the system response deviated from expected output. (6).
 
 ### Defect 1
-
-
