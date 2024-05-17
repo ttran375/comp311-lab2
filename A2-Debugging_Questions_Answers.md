@@ -34,31 +34,17 @@ The main driver of the application is `UserPrompter.java`, as it handles user in
 - **Location:** Method `getYesNoAnswer()` in the `UserPrompter` class.
 
 ```java
-setPrompt(getPrompt() + ". Please answer Y or N: ");
-```
-
-### Rectification
-
-Here are the rectified sections of the code:
-
-### 1. Correct Handling of Prompt in `getYesNoAnswer()`
-
-Modify the `getYesNoAnswer()` method to properly update the prompt with additional instructions.
-
-```java
 public boolean getYesNoAnswer() {
-    for (int i = 0; i < 3; i++) {
-        String answer = getAnswer();
-        if (answer == null)
-            return false;
-        char ans = answer.toUpperCase().charAt(0);
-        if (ans == 'Y')
-            return true;
-        else if (ans == 'N')
-            return false;
-        setPrompt("Please answer Y or N: ");
-    }
-    return false;
+	for (int i = 0; i < 3; i++) {
+		String answer = getAnswer();
+		if (answer == null)
+			return false;
+		char ans = answer.toUpperCase().charAt(0);
+		if (ans == 'Y')
+			return true;
+		setPrompt(getPrompt() + ". Please answer Y or N: ");
+	}
+	return false;
 }
 ```
 
@@ -77,3 +63,20 @@ public boolean getYesNoAnswer() {
 ## Question 5
 
 **5. Give the Screenshots for the import of jar file into the java IDE , Debug mode and fix of no error. (1)**
+
+``` java
+public boolean getYesNoAnswer() {
+    for (int i = 0; i < 3; i++) {
+        String answer = getAnswer();
+        if (answer == null)
+            return false;
+        char ans = answer.toUpperCase().charAt(0);
+        if (ans == 'Y')
+            return true;
+        else if (ans == 'N')
+            return false;
+        setPrompt("Please answer Y or N: ");
+    }
+    return false;
+}
+```
