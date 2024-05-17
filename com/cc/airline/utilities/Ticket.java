@@ -175,7 +175,7 @@ class SeatReserver {
 
 	private Seat findFirstEmptySeat(ArrayList<Seat> seats, SeatingClass sClass) {
 		Seat seat = null;
-		int firstSeat = 0;
+		int firstSeat = sClass.getIndexFirstSeat(); // Correctly set the starting index
 		for (int i = 0; i < sClass.getNumSeats(); i++) {
 			seat = seats.get(i + firstSeat);
 			if (seat.getTicket() == null) {
