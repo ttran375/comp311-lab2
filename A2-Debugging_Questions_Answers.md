@@ -73,3 +73,7 @@ public boolean getYesNoAnswer() {
 3. **Step over**: This command allows the debugger to execute the current line of code and move to the next line without stepping into any called functions or methods. It is used to proceed to the next line in the current scope.
 
 4. **Breakpoint**: A breakpoint is a designated stopping point in the code where the debugger will pause execution. It allows you to inspect the program's state at specific lines of code, making it easier to diagnose and understand the behavior of your program.
+
+## Question 5
+
+**5. Give the Screenshots for the import of jar file into the java IDE , Debug mode and fix of no error. (1)**
