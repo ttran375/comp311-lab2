@@ -64,6 +64,8 @@ public boolean getYesNoAnswer() {
 
 **5. Give the Screenshots for the import of jar file into the java IDE , Debug mode and fix of no error. (1)**
 
+![](defect1.png)
+
 ``` java
 public boolean getYesNoAnswer() {
     for (int i = 0; i < 3; i++) {
@@ -80,3 +82,5 @@ public boolean getYesNoAnswer() {
     return false;
 }
 ```
+
+![](defect1.png)
