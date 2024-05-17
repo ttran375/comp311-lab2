@@ -5,13 +5,13 @@ output:
 
 # COMP311 Assignment 2: Debugging exercise
 
-## Questions 1
+## Question 1
 
 **What class is the driver for this slice of the application? (0.5)**
 
 The main driver of the application is `UserPrompter.java`, as it handles user interaction directly and starts the process of gathering passenger information and seat assignments. `Manifest.java` serves as a supportive class that manages passenger data and could be used in conjunction with `UserPrompter` to provide a more complete functionality.
 
-## Questions 2
+## Question 2
 
 **What major part of the application is replaced by a stub? Name the class(es) that make up this stub. (0.5)**
 
@@ -24,7 +24,7 @@ The main driver of the application is `UserPrompter.java`, as it handles user in
 - `UserPrompter.java`:
   - `confirmSeat(String passengerName, int seatNumber)`: This method should handle seat confirmation but currently just prints a confirmation message without actually performing any checks or updates.
 
-## Questions 3
+## Question 3
 
 **3. List three defects that you located in the original code, and describe then as you would in a tester’s defect report. Describe where user is in using the system and what the user input. Then state how the system response deviated from expected output. (6).**
 
