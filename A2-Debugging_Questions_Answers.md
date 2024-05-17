@@ -25,11 +25,3 @@ The main driver of the application is `UserPrompter.java`, as it handles user in
 3. List three defects that you located in the original code, and describe then as you would in a tester’s
 defect report. Describe where user is in using the system and what the user input. Then state how
 the system response deviated from expected output. (6).
-
-### Defect 1
-
-`getYesNoAnswer` method does not properly handle edge cases, including `N` inputs and invalid responses.
-
-```java
-
-```
