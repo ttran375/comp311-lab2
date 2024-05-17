@@ -139,15 +139,15 @@ private Passenger getPassenger() {
     String initial = new UserPrompter("Initial?").getAnswer();
     PassengerName pName = new PassengerName(firstName, initial, lastName);
     if (new UserPrompter("Are you a frequent flyer?").getYesNoAnswer()) {
-    	String fFlyerId = new UserPrompter("Frequent flyer number?")
-    			.getAnswerId();
-    	passenger = new FrequentFlyer(pName, fFlyerId);
+     String fFlyerId = new UserPrompter("Frequent flyer number?")
+       .getAnswerId();
+     passenger = new FrequentFlyer(pName, fFlyerId);
     } else if (new UserPrompter("Are you an airline employee?")
-    		.getYesNoAnswer()) {
-    	String employeeId = new UserPrompter("Employee ID?").getAnswerId();
-    	passenger = new StaffPassenger(pName, employeeId);
+      .getYesNoAnswer()) {
+     String employeeId = new UserPrompter("Employee ID?").getAnswerId();
+     passenger = new StaffPassenger(pName, employeeId);
     } else {
-    	passenger = new Passenger(pName);
+     passenger = new Passenger(pName);
     }
     return passenger;
 }
