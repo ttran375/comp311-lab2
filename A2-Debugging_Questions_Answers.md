@@ -23,7 +23,7 @@ The main driver of the application is `UserPrompter.java`, as it handles user in
 
 **3. List three defects that you located in the original code, and describe then as you would in a tester’s defect report. Describe where user is in using the system and what the user input. Then state how the system response deviated from expected output. (6).**
 
-### Defect 1: Incorrect Handling of Prompt in `getYesNoAnswer()`
+### Incorrect Handling of Prompt in `getYesNoAnswer()`
 
 - **Defect Description:** The method `getYesNoAnswer()` attempts to modify the prompt by appending additional text each time the user input is invalid. However, it uses `getPrompt()` which fetches the prompt string, but does not update the current instance's prompt.
 - **User's Actions:** User is prompted to answer a yes/no question. The user provides input other than 'Y' or 'N'.
@@ -31,7 +31,7 @@ The main driver of the application is `UserPrompter.java`, as it handles user in
 - **Expected Response:** The system should update the prompt with the additional instruction "Please answer Y or N:" for subsequent attempts.
 - **Location:** Method `getYesNoAnswer()` in the `UserPrompter` class.
 
-### Defect 2: Incorrect Handling of Prompt in `getPassenger()`
+### Incorrect Handling of Prompt in `getPassenger()`
 
 - **Defect Description:** The method `getPassenger()` does not validate user inputs for alphabetic characters, allowing numeric or special character inputs for first name, last name, and initial.
 - **User's Actions:** User is prompted to enter first name, last name, and initial. The user provides inputs containing numeric or special characters.
@@ -39,7 +39,7 @@ The main driver of the application is `UserPrompter.java`, as it handles user in
 - **Expected Response:** The system should validate that the inputs for first name, last name, and initial contain only alphabetic characters and prompt the user again if the input is invalid.
 - **Location:** Method `getPassenger()` in the `PassengerService` class.
 
-### Defect 3: Incorrect Handling of Prompt in `findFirstEmptySeat()`
+### Incorrect Handling of Prompt in `findFirstEmptySeat()`
 
 - **Defect Description:** The method `findFirstEmptySeat` does not correctly determine the starting index for searching seats within the specified `SeatingClass`.
 - **User's Actions:** Attempt to sell a ticket when the initially assigned seat is already taken.
@@ -61,7 +61,7 @@ The main driver of the application is `UserPrompter.java`, as it handles user in
 
 ## Question 5
 
-### Defect 1: Incorrect Handling of Prompt in `getYesNoAnswer()`
+### Incorrect Handling of Prompt in `getYesNoAnswer()`
 
 **5. Give the Screenshots for the import of jar file into the java IDE , Debug mode and fix of no error. (1)**
 
@@ -82,7 +82,7 @@ public boolean getYesNoAnswer() {
 }
 ```
 
-### Defect 2: Incorrect Handling of Prompt in `getPassenger()`
+### Incorrect Handling of Prompt in `getPassenger()`
 
 ``` java
 public String getAnswer() {
@@ -142,7 +142,7 @@ private Passenger getPassenger() {
 }
 ```
 
-### Defect 3: Incorrect Handling of Prompt in `findFirstEmptySeat()`
+### Incorrect Handling of Prompt in `findFirstEmptySeat()`
 
 ```java
 private Seat findFirstEmptySeat(ArrayList<Seat> seats, SeatingClass sClass) {
