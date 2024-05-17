@@ -33,17 +33,18 @@ public class UserPrompter {
 	}
 
 	public boolean getYesNoAnswer() {
-		for (int i = 0; i < 3; i++) {
-			String answer = getAnswer();
-			if (answer == null)
-				return false;
-			char ans = answer.toUpperCase().charAt(0);
-			if (ans == 'Y')
-				return true;
-			setPrompt(getPrompt() + ". Please answer Y or N: ");
-		}
-		return false;
-	}
+        String originalPrompt = getPrompt();
+        for (int i = 0; i < 3; i++) {
+            String answer = getAnswer();
+            if (answer == null)
+                return false;
+            char ans = answer.toUpperCase().charAt(0);
+            if (ans == 'Y')
+                return true;
+            setPrompt(originalPrompt + ". Please answer Y or N: ");
+        }
+        return false;
+    }
 
 	public static void main(String[] args) {
 		UserPrompter up = new UserPrompter();
