@@ -48,6 +48,14 @@ public boolean getYesNoAnswer() {
 }
 ```
 
+#### Defect 2: Incorrect Handling of Prompt in `getPassenger()`
+
+- **Defect Description:** The method `getPassenger()` does not validate user inputs for alphabetic characters, allowing numeric or special character inputs for first name, last name, and initial.
+- **User's Actions:** User is prompted to enter first name, last name, and initial. The user provides inputs containing numeric or special characters.
+- **System's Response:** The system accepts these inputs without validation and proceeds with the creation of the `Passenger` object.
+- **Expected Response:** The system should validate that the inputs for first name, last name, and initial contain only alphabetic characters and prompt the user again if the input is invalid.
+- **Location:** Method `getPassenger()` in the `PassengerService` class.
+
 ## Question 4
 
 **4. Briefly define the term Step in, Step out, Step over and Breakpoint: (2)**
