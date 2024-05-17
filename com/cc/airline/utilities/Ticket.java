@@ -3,8 +3,6 @@ package com.cc.airline.utilities;
 import java.util.ArrayList;
 import java.util.Random;
 
-import java.util.ArrayList;
-
 import com.cc.airline.utilities.SeatReserver;
 
 class PassengerName {
