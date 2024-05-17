@@ -1,3 +1,8 @@
+---
+output:
+  word_document
+---
+
 # COMP311 Assignment 2: Debugging exercise
 
 ## Questions 1
