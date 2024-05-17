@@ -83,4 +83,4 @@ public boolean getYesNoAnswer() {
 }
 ```
 
-![](defect1.png)
+![](fix1.png)
