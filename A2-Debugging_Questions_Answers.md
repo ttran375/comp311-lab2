@@ -35,42 +35,26 @@ The main driver of the application is `UserPrompter.java`, as it handles user in
 
 ```java
 public boolean getYesNoAnswer() {
- for (int i = 0; i < 3; i++) {
-  String answer = getAnswer();
-  if (answer == null)
-   return false;
-  char ans = answer.toUpperCase().charAt(0);
-  if (ans == 'Y')
-   return true;
-  setPrompt(getPrompt() + ". Please answer Y or N: ");
- }
- return false;
+	for (int i = 0; i < 3; i++) {
+		String answer = getAnswer();
+		if (answer == null)
+			return false;
+		char ans = answer.toUpperCase().charAt(0);
+		if (ans == 'Y')
+			return true;
+		setPrompt(getPrompt() + ". Please answer Y or N: ");
+	}
+	return false;
 }
 ```
 
-#### Defect 2: Incorrect Handling of Prompt in `getAnswer()`
+#### Defect 1: Incorrect Handling of Prompt in `getPassenger()`
 
-- **Defect Description:** The method `getAnswer()` does not validate user inputs for alphabetic characters, allowing numeric or special character inputs for first name, last name, and initial.
+- **Defect Description:** The method `getPassenger()` does not validate user inputs for alphabetic characters, allowing numeric or special character inputs for first name, last name, and initial.
 - **User's Actions:** User is prompted to enter first name, last name, and initial. The user provides inputs containing numeric or special characters.
 - **System's Response:** The system accepts these inputs without validation and proceeds with the creation of the `Passenger` object.
 - **Expected Response:** The system should validate that the inputs for first name, last name, and initial contain only alphabetic characters and prompt the user again if the input is invalid.
-- **Location:** Method `getAnswer()` in the `PassengerService` class.
-
-``` python
-public String getAnswer() {
-  try {
-   String answer = null;
-   while (answer == null || answer.length() < 1) {
-    System.out.print(prompt + " ");
-    answer = lineReader.readLine().trim();
-   }
-   return answer;
-  } catch (IOException ioe) {
-   // if console I/O fails there is no recovery
-   return null;
-  }
- }
-```
+- **Location:** Method `getPassenger()` in the `PassengerService` class.
 
 ## Question 4
 

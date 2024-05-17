@@ -19,18 +19,38 @@ public class UserPrompter {
 	}
 
 	public String getAnswer() {
-		try {
-			String answer = null;
-			while (answer == null || answer.length() < 1) {
-				System.out.print(prompt + " ");
-				answer = lineReader.readLine().trim();
-			}
-			return answer;
-		} catch (IOException ioe) {
-			// if console I/O fails there is no recovery
-			return null;
-		}
-	}
+        String answer = null;
+        try {
+            while (answer == null || answer.trim().isEmpty() || !answer.matches("[a-zA-Z]+")) {
+                System.out.print(prompt + " ");
+                answer = lineReader.readLine();
+                if (!answer.matches("[a-zA-Z]+")) {
+                    System.out.println("Please enter only alphabetic characters.");
+                }
+            }
+            return answer.trim();
+        } catch (IOException ioe) {
+            // if console I/O fails there is no recovery
+            return null;
+        }
+    }
+
+	public String getAnswerId() {
+        String answer = null;
+        try {
+            while (answer == null || answer.trim().isEmpty() || !answer.matches("\\d+")) {
+                System.out.print(prompt + " ");
+                answer = lineReader.readLine();
+                if (!answer.matches("\\d+")) {
+                    System.out.println("Please enter only numeric characters.");
+                }
+            }
+            return answer.trim();
+        } catch (IOException ioe) {
+            // if console I/O fails there is no recovery
+            return null;
+        }
+    }
 
 	public boolean getYesNoAnswer() {
 		for (int i = 0; i < 3; i++) {
