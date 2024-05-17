@@ -2,14 +2,13 @@
 
 ## Questions 1
 
-1. What class is the driver for this slice of the application? (0.5)
+**What class is the driver for this slice of the application? (0.5)**
 
 The main driver of the application is `UserPrompter.java`, as it handles user interaction directly and starts the process of gathering passenger information and seat assignments. `Manifest.java` serves as a supportive class that manages passenger data and could be used in conjunction with `UserPrompter` to provide a more complete functionality.
 
 ## Questions 2
 
-2. What major part of the application is replaced by a stub? Name the class(es) that make up this stub.
-(0.5)
+**What major part of the application is replaced by a stub? Name the class(es) that make up this stub. (0.5)**
 
 - `Manifest.java`:
   - `isFull()`: This method is supposed to determine if the flight is full, but currently, it always returns `false`.
@@ -22,9 +21,7 @@ The main driver of the application is `UserPrompter.java`, as it handles user in
 
 ## Questions 3
 
-3. List three defects that you located in the original code, and describe then as you would in a tester’s
-defect report. Describe where user is in using the system and what the user input. Then state how
-the system response deviated from expected output. (6).
+**3. List three defects that you located in the original code, and describe then as you would in a tester’s defect report. Describe where user is in using the system and what the user input. Then state how the system response deviated from expected output. (6).**
 
 ### Defect Report
 
@@ -65,6 +62,63 @@ if (seat.getTicket() != null) {
 - **System's Response:** The system incorrectly updates the number of sold seats, potentially allowing overbooking.
 - **Expected Response:** The system should validate and prevent the number of sold seats from exceeding the total seats available.
 - **Location:** Method `setNumSeatsSold(int numSeatsSold)` in the `SeatingClass` enum.
+
+```java
+public void setNumSeatsSold(int numSeatsSold) {
+    if (numSeatsSold <= this.numSeats) {
+        this.numSeatsSold = numSeatsSold;
+    } else {
+        throw new IllegalArgumentException("Number of seats sold cannot exceed total seats.");
+    }
+}
+```
+
+### Rectification
+
+
+Here are the rectified sections of the code:
+
+### 1. Correct Handling of Prompt in `getYesNoAnswer()`
+Modify the `getYesNoAnswer()` method to properly update the prompt with additional instructions.
+
+```java
+public boolean getYesNoAnswer() {
+    for (int i = 0; i < 3; i++) {
+        String answer = getAnswer();
+        if (answer == null)
+            return false;
+        char ans = answer.toUpperCase().charAt(0);
+        if (ans == 'Y')
+            return true;
+        setPrompt(prompt + " Please answer Y or N: ");
+    }
+    return false;
+}
+```
+
+### 2. Correct Return Value Handling in `assignSeat()`
+Update the `assignSeat(SeatingClass sClass)` method to correctly handle seat assignment and ensure the first available seat is assigned if the initially assigned seat is taken.
+
+```java
+private Seat assignSeat(SeatingClass sClass) {
+    int seatNumber;
+    seatNumber = seatFinder.nextInt(sClass.getNumSeats()) + sClass.getIndexFirstSeat();
+    ArrayList<Seat> seats = plan.getSeats();
+    Seat seat = seats.get(seatNumber);
+    if (seat.getTicket() != null) {
+        seat = findFirstEmptySeat(seats, sClass);
+        if (seat == null) {
+            return null;
+        }
+    }
+    numSeatsSold++;
+    sClass.setNumSeatsSold(sClass.getNumSeatsSold() + 1);
+    return seat;
+}
+```
+
+### 3. Correct Calculation of `numSeatsSold` in `SeatingClass`
+Ensure the `setNumSeatsSold(int numSeatsSold)` method in the `SeatingClass` enum validates the number of sold seats.
 
 ```java
 public void setNumSeatsSold(int numSeatsSold) {
