@@ -23,9 +23,7 @@ The main driver of the application is `UserPrompter.java`, as it handles user in
 
 **3. List three defects that you located in the original code, and describe then as you would in a tester’s defect report. Describe where user is in using the system and what the user input. Then state how the system response deviated from expected output. (6).**
 
-### Defect Report
-
-#### Defect 1: Incorrect Handling of Prompt in `getYesNoAnswer()`
+### Defect 1: Incorrect Handling of Prompt in `getYesNoAnswer()`
 
 - **Defect Description:** The method `getYesNoAnswer()` attempts to modify the prompt by appending additional text each time the user input is invalid. However, it uses `getPrompt()` which fetches the prompt string, but does not update the current instance's prompt.
 - **User's Actions:** User is prompted to answer a yes/no question. The user provides input other than 'Y' or 'N'.
@@ -35,20 +33,20 @@ The main driver of the application is `UserPrompter.java`, as it handles user in
 
 ```java
 public boolean getYesNoAnswer() {
-	for (int i = 0; i < 3; i++) {
-		String answer = getAnswer();
-		if (answer == null)
-			return false;
-		char ans = answer.toUpperCase().charAt(0);
-		if (ans == 'Y')
-			return true;
-		setPrompt(getPrompt() + ". Please answer Y or N: ");
-	}
-	return false;
+ for (int i = 0; i < 3; i++) {
+  String answer = getAnswer();
+  if (answer == null)
+   return false;
+  char ans = answer.toUpperCase().charAt(0);
+  if (ans == 'Y')
+   return true;
+  setPrompt(getPrompt() + ". Please answer Y or N: ");
+ }
+ return false;
 }
 ```
 
-#### Defect 1: Incorrect Handling of Prompt in `getPassenger()`
+### Defect 2: Incorrect Handling of Prompt in `getPassenger()`
 
 - **Defect Description:** The method `getPassenger()` does not validate user inputs for alphabetic characters, allowing numeric or special character inputs for first name, last name, and initial.
 - **User's Actions:** User is prompted to enter first name, last name, and initial. The user provides inputs containing numeric or special characters.
@@ -69,6 +67,8 @@ public boolean getYesNoAnswer() {
 4. **Breakpoint**: A breakpoint is a designated stopping point in the code where the debugger will pause execution. It allows you to inspect the program's state at specific lines of code, making it easier to diagnose and understand the behavior of your program.
 
 ## Question 5
+
+### Defect 1: Incorrect Handling of Prompt in `getYesNoAnswer()`
 
 **5. Give the Screenshots for the import of jar file into the java IDE , Debug mode and fix of no error. (1)**
 
@@ -92,3 +92,63 @@ public boolean getYesNoAnswer() {
 ```
 
 ![](_getYesNoAnswer.png)
+
+### Defect 2: Incorrect Handling of Prompt in `getPassenger()`
+
+``` java
+public String getAnswer() {
+        String answer = null;
+        try {
+            while (answer == null || answer.trim().isEmpty() || !answer.matches("[a-zA-Z]+")) {
+                System.out.print(prompt + " ");
+                answer = lineReader.readLine();
+                if (!answer.matches("[a-zA-Z]+")) {
+                    System.out.println("Please enter only alphabetic characters.");
+                }
+            }
+            return answer.trim();
+        } catch (IOException ioe) {
+            // if console I/O fails there is no recovery
+            return null;
+        }
+    }
+
+ public String getAnswerId() {
+        String answer = null;
+        try {
+            while (answer == null || answer.trim().isEmpty() || !answer.matches("\\d+")) {
+                System.out.print(prompt + " ");
+                answer = lineReader.readLine();
+                if (!answer.matches("\\d+")) {
+                    System.out.println("Please enter only numeric characters.");
+                }
+            }
+            return answer.trim();
+        } catch (IOException ioe) {
+            // if console I/O fails there is no recovery
+            return null;
+        }
+    }
+```
+
+``` java
+private Passenger getPassenger() {
+    Passenger passenger = null;
+    String firstName = new UserPrompter("First name?").getAnswer();
+    String lastName = new UserPrompter("Last name?").getAnswer();
+    String initial = new UserPrompter("Initial?").getAnswer();
+    PassengerName pName = new PassengerName(firstName, initial, lastName);
+    if (new UserPrompter("Are you a frequent flyer?").getYesNoAnswer()) {
+    	String fFlyerId = new UserPrompter("Frequent flyer number?")
+    			.getAnswerId();
+    	passenger = new FrequentFlyer(pName, fFlyerId);
+    } else if (new UserPrompter("Are you an airline employee?")
+    		.getYesNoAnswer()) {
+    	String employeeId = new UserPrompter("Employee ID?").getAnswerId();
+    	passenger = new StaffPassenger(pName, employeeId);
+    } else {
+    	passenger = new Passenger(pName);
+    }
+    return passenger;
+}
+```
