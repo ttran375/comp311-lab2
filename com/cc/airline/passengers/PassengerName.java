@@ -51,3 +51,42 @@ public class PassengerName {
 	}
 
 }
+
+class Passenger {
+	private PassengerName pName;
+
+	public Passenger() {
+		this.pName = new PassengerName("T.", "B.", "A.");
+	}
+
+	public Passenger(PassengerName pName) {
+		this();
+		this.pName = pName;
+	}
+
+	public PassengerName getPName() {
+		return pName;
+	}
+
+	public void setPName(PassengerName name) {
+		pName = name;
+	}
+}
+
+class FrequentFlyer extends Passenger {
+
+	private String fFlyerId;
+
+	public FrequentFlyer(PassengerName pName, String fFlyerId) {
+		super(pName);
+		this.fFlyerId = fFlyerId;
+	}
+
+	public String getFFlyerId() {
+		return fFlyerId;
+	}
+
+	public void setFFlyerId(String flyerId) {
+		fFlyerId = flyerId;
+	}
+}
