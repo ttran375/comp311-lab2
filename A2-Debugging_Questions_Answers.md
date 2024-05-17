@@ -48,13 +48,29 @@ public boolean getYesNoAnswer() {
 }
 ```
 
-#### Defect 2: Incorrect Handling of Prompt in `getPassenger()`
+#### Defect 2: Incorrect Handling of Prompt in `getAnswer()`
 
-- **Defect Description:** The method `getPassenger()` does not validate user inputs for alphabetic characters, allowing numeric or special character inputs for first name, last name, and initial.
+- **Defect Description:** The method `getAnswer()` does not validate user inputs for alphabetic characters, allowing numeric or special character inputs for first name, last name, and initial.
 - **User's Actions:** User is prompted to enter first name, last name, and initial. The user provides inputs containing numeric or special characters.
 - **System's Response:** The system accepts these inputs without validation and proceeds with the creation of the `Passenger` object.
 - **Expected Response:** The system should validate that the inputs for first name, last name, and initial contain only alphabetic characters and prompt the user again if the input is invalid.
-- **Location:** Method `getPassenger()` in the `PassengerService` class.
+- **Location:** Method `getAnswer()` in the `PassengerService` class.
+
+``` python
+public String getAnswer() {
+		try {
+			String answer = null;
+			while (answer == null || answer.length() < 1) {
+				System.out.print(prompt + " ");
+				answer = lineReader.readLine().trim();
+			}
+			return answer;
+		} catch (IOException ioe) {
+			// if console I/O fails there is no recovery
+			return null;
+		}
+	}
+```
 
 ## Question 4
 
