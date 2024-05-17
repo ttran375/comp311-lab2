@@ -37,48 +37,12 @@ The main driver of the application is `UserPrompter.java`, as it handles user in
 setPrompt(getPrompt() + ". Please answer Y or N: ");
 ```
 
-#### Defect 2: Missing Return Value in `assignSeat()`
-
-- **Defect Description:** The method `assignSeat(SeatingClass sClass)` does not correctly handle the situation where a seat is assigned to a passenger. If a random seat is already taken, the method should find the first available seat in the section but does not return `null` correctly.
-- **User's Actions:** User attempts to book a seat when the initial randomly assigned seat is already taken.
-- **System's Response:** The system may throw an `IndexOutOfBoundsException` or improperly assign a seat.
-- **Expected Response:** The system should find and assign the first available seat in the section.
-- **Location:** Method `assignSeat(SeatingClass sClass)` in the `SeatReserver` class.
-
-```java
-Seat seat = seats.get(seatNumber);
-if (seat.getTicket() != null) {
-    seat = findFirstEmptySeat(seats, sClass);
-    if (seat == null) {
-        return null;
-    }
-}
-```
-
-#### Defect 3: Incorrect Calculation of `numSeatsSold` in `SeatingClass`
-
-- **Defect Description:** The method `setNumSeatsSold(int numSeatsSold)` in the `SeatingClass` enum updates the number of sold seats, but the logic does not account for boundary conditions, such as exceeding the total number of seats.
-- **User's Actions:** User attempts to sell a ticket when the number of sold seats is near or equal to the total seats available.
-- **System's Response:** The system incorrectly updates the number of sold seats, potentially allowing overbooking.
-- **Expected Response:** The system should validate and prevent the number of sold seats from exceeding the total seats available.
-- **Location:** Method `setNumSeatsSold(int numSeatsSold)` in the `SeatingClass` enum.
-
-```java
-public void setNumSeatsSold(int numSeatsSold) {
-    if (numSeatsSold <= this.numSeats) {
-        this.numSeatsSold = numSeatsSold;
-    } else {
-        throw new IllegalArgumentException("Number of seats sold cannot exceed total seats.");
-    }
-}
-```
-
 ### Rectification
-
 
 Here are the rectified sections of the code:
 
 ### 1. Correct Handling of Prompt in `getYesNoAnswer()`
+
 Modify the `getYesNoAnswer()` method to properly update the prompt with additional instructions.
 
 ```java
@@ -90,42 +54,22 @@ public boolean getYesNoAnswer() {
         char ans = answer.toUpperCase().charAt(0);
         if (ans == 'Y')
             return true;
-        setPrompt(prompt + " Please answer Y or N: ");
+        else if (ans == 'N')
+            return false;
+        setPrompt("Please answer Y or N: ");
     }
     return false;
 }
 ```
 
-### 2. Correct Return Value Handling in `assignSeat()`
-Update the `assignSeat(SeatingClass sClass)` method to correctly handle seat assignment and ensure the first available seat is assigned if the initially assigned seat is taken.
+## Question 4
 
-```java
-private Seat assignSeat(SeatingClass sClass) {
-    int seatNumber;
-    seatNumber = seatFinder.nextInt(sClass.getNumSeats()) + sClass.getIndexFirstSeat();
-    ArrayList<Seat> seats = plan.getSeats();
-    Seat seat = seats.get(seatNumber);
-    if (seat.getTicket() != null) {
-        seat = findFirstEmptySeat(seats, sClass);
-        if (seat == null) {
-            return null;
-        }
-    }
-    numSeatsSold++;
-    sClass.setNumSeatsSold(sClass.getNumSeatsSold() + 1);
-    return seat;
-}
-```
+**4. Briefly define the term Step in, Step out, Step over and Breakpoint: (2)**
 
-### 3. Correct Calculation of `numSeatsSold` in `SeatingClass`
-Ensure the `setNumSeatsSold(int numSeatsSold)` method in the `SeatingClass` enum validates the number of sold seats.
+1. **Step in**: This command allows the debugger to enter into the code of a called function or method. It will pause execution at the first line of the called function, allowing you to examine its execution line by line.
 
-```java
-public void setNumSeatsSold(int numSeatsSold) {
-    if (numSeatsSold <= this.numSeats) {
-        this.numSeatsSold = numSeatsSold;
-    } else {
-        throw new IllegalArgumentException("Number of seats sold cannot exceed total seats.");
-    }
-}
-```
+2. **Step out**: This command lets the debugger complete the execution of the current function or method and pause at the line of code immediately after the function call. It is useful for quickly finishing the execution of a function without stepping through each line inside it.
+
+3. **Step over**: This command allows the debugger to execute the current line of code and move to the next line without stepping into any called functions or methods. It is used to proceed to the next line in the current scope.
+
+4. **Breakpoint**: A breakpoint is a designated stopping point in the code where the debugger will pause execution. It allows you to inspect the program's state at specific lines of code, making it easier to diagnose and understand the behavior of your program.
