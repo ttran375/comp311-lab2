@@ -31,21 +31,6 @@ The main driver of the application is `UserPrompter.java`, as it handles user in
 - **Expected Response:** The system should update the prompt with the additional instruction "Please answer Y or N:" for subsequent attempts.
 - **Location:** Method `getYesNoAnswer()` in the `UserPrompter` class.
 
-```java
-public boolean getYesNoAnswer() {
- for (int i = 0; i < 3; i++) {
-  String answer = getAnswer();
-  if (answer == null)
-   return false;
-  char ans = answer.toUpperCase().charAt(0);
-  if (ans == 'Y')
-   return true;
-  setPrompt(getPrompt() + ". Please answer Y or N: ");
- }
- return false;
-}
-```
-
 ### Defect 2: Incorrect Handling of Prompt in `getPassenger()`
 
 - **Defect Description:** The method `getPassenger()` does not validate user inputs for alphabetic characters, allowing numeric or special character inputs for first name, last name, and initial.
@@ -54,28 +39,13 @@ public boolean getYesNoAnswer() {
 - **Expected Response:** The system should validate that the inputs for first name, last name, and initial contain only alphabetic characters and prompt the user again if the input is invalid.
 - **Location:** Method `getPassenger()` in the `PassengerService` class.
 
+### Defect 3: Incorrect Handling of Prompt in `findFirstEmptySeat()`
 
 - **Defect Description:** The method `findFirstEmptySeat` does not correctly determine the starting index for searching seats within the specified `SeatingClass`.
 - **User's Actions:** Attempt to sell a ticket when the initially assigned seat is already taken.
 - **System's Response:** The system searches for an empty seat starting from index 0 of the overall seating plan instead of the index of the first seat of the specified seating class.
 - **Expected Response:** The system should search for the first empty seat starting from the index of the first seat of the specified seating class.
 - **Location:** Method `findFirstEmptySeat` in the `SeatReserver` class.
-
-### Defect 2: Incorrect Handling of Prompt in `findFirstEmptySeat()`
-
-```java
-private Seat findFirstEmptySeat(ArrayList<Seat> seats, SeatingClass sClass) {
-    Seat seat = null;
-    int firstSeat = sClass.getIndexFirstSeat(); // Correctly set the starting index
-    for (int i = 0; i < sClass.getNumSeats(); i++) {
-        seat = seats.get(i + firstSeat);
-        if (seat.getTicket() == null) {
-            return seat;
-        }
-    }
-    return null;
-}
-```
 
 ## Question 4
 
@@ -95,8 +65,6 @@ private Seat findFirstEmptySeat(ArrayList<Seat> seats, SeatingClass sClass) {
 
 **5. Give the Screenshots for the import of jar file into the java IDE , Debug mode and fix of no error. (1)**
 
-![](getYesNoAnswer.png)
-
 ``` java
 public boolean getYesNoAnswer() {
     for (int i = 0; i < 3; i++) {
@@ -113,8 +81,6 @@ public boolean getYesNoAnswer() {
     return false;
 }
 ```
-
-![](_getYesNoAnswer.png)
 
 ### Defect 2: Incorrect Handling of Prompt in `getPassenger()`
 
@@ -162,16 +128,32 @@ private Passenger getPassenger() {
     String initial = new UserPrompter("Initial?").getAnswer();
     PassengerName pName = new PassengerName(firstName, initial, lastName);
     if (new UserPrompter("Are you a frequent flyer?").getYesNoAnswer()) {
-    	String fFlyerId = new UserPrompter("Frequent flyer number?")
-    			.getAnswerId();
-    	passenger = new FrequentFlyer(pName, fFlyerId);
+     String fFlyerId = new UserPrompter("Frequent flyer number?")
+       .getAnswerId();
+     passenger = new FrequentFlyer(pName, fFlyerId);
     } else if (new UserPrompter("Are you an airline employee?")
-    		.getYesNoAnswer()) {
-    	String employeeId = new UserPrompter("Employee ID?").getAnswerId();
-    	passenger = new StaffPassenger(pName, employeeId);
+      .getYesNoAnswer()) {
+     String employeeId = new UserPrompter("Employee ID?").getAnswerId();
+     passenger = new StaffPassenger(pName, employeeId);
     } else {
-    	passenger = new Passenger(pName);
+     passenger = new Passenger(pName);
     }
     return passenger;
+}
+```
+
+### Defect 3: Incorrect Handling of Prompt in `findFirstEmptySeat()`
+
+```java
+private Seat findFirstEmptySeat(ArrayList<Seat> seats, SeatingClass sClass) {
+    Seat seat = null;
+    int firstSeat = sClass.getIndexFirstSeat();
+    for (int i = 0; i < sClass.getNumSeats(); i++) {
+        seat = seats.get(i + firstSeat);
+        if (seat.getTicket() == null) {
+            return seat;
+        }
+    }
+    return null;
 }
 ```
