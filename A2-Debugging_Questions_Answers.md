@@ -45,13 +45,7 @@ the system response deviated from expected output. (6).
 
 ### Defect 1
 
-The `getYesNoAnswer` method in the `UserPrompter` class has issues:
-
-1. The current implementation of `getYesNoAnswer` does not correctly handle both 'Y', 'N', and invalid responses.
-2. **Prompt adjustment within loop**: The prompt adjustment for invalid inputs should be handled properly without continuously appending to the prompt.
-3. **Clearer instructions and error handling**: It's useful to provide clearer instructions and better error handling.
-
-Here's an updated version of the `UserPrompter` class with the necessary fixes:
+`getYesNoAnswer` method does not properly handle edge cases, including empty inputs and invalid responses. Additionally, we should make sure the prompt message is reset correctly after each attempt. Here's the updated UserPrompter class:
 
 ```java
 package com.cc.airline.utilities;
