@@ -86,38 +86,38 @@ public boolean getYesNoAnswer() {
 
 ``` java
 public String getAnswer() {
-        String answer = null;
-        try {
-            while (answer == null || answer.trim().isEmpty() || !answer.matches("[a-zA-Z]+")) {
-                System.out.print(prompt + " ");
-                answer = lineReader.readLine();
-                if (!answer.matches("[a-zA-Z]+")) {
-                    System.out.println("Please enter only alphabetic characters.");
-                }
+    String answer = null;
+    try {
+        while (answer == null || answer.trim().isEmpty() || !answer.matches("[a-zA-Z]+")) {
+            System.out.print(prompt + " ");
+            answer = lineReader.readLine();
+            if (!answer.matches("[a-zA-Z]+")) {
+                System.out.println("Please enter only alphabetic characters.");
             }
-            return answer.trim();
-        } catch (IOException ioe) {
-            // if console I/O fails there is no recovery
-            return null;
         }
+        return answer.trim();
+    } catch (IOException ioe) {
+        // if console I/O fails there is no recovery
+        return null;
     }
+}
 
- public String getAnswerId() {
-        String answer = null;
-        try {
-            while (answer == null || answer.trim().isEmpty() || !answer.matches("\\d+")) {
-                System.out.print(prompt + " ");
-                answer = lineReader.readLine();
-                if (!answer.matches("\\d+")) {
-                    System.out.println("Please enter only numeric characters.");
-                }
+public String getAnswerId() {
+    String answer = null;
+    try {
+        while (answer == null || answer.trim().isEmpty() || !answer.matches("\\d+")) {
+            System.out.print(prompt + " ");
+            answer = lineReader.readLine();
+            if (!answer.matches("\\d+")) {
+                System.out.println("Please enter only numeric characters.");
             }
-            return answer.trim();
-        } catch (IOException ioe) {
-            // if console I/O fails there is no recovery
-            return null;
         }
+        return answer.trim();
+    } catch (IOException ioe) {
+        // if console I/O fails there is no recovery
+        return null;
     }
+}
 ```
 
 ``` java
