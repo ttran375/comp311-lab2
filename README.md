@@ -1,5 +1,7 @@
 # COMP311 Assignment 2: Debugging exercise
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ttran375/comp311-lab2)
+
 ## Instructions
 
 You are given a JAR that contains source code.
